@@ -1,7 +1,7 @@
 <template>
    <AdminTemplate>
         <div>
-            MAIN
+            USERS
         </div>
         <ul>
             <li><nuxt-link to="/main">Main</nuxt-link></li>
