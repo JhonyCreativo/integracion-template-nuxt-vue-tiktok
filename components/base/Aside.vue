@@ -6,23 +6,20 @@
     <div class="container-xxl d-flex h-100">
       <ul class="menu-inner">
     
-        <li class="menu-item active">
+        <li class="menu-item " :class="{ 'active': $route.path === '/' }">
           <nuxt-link to="/" class="menu-link">
             <Icon name="tdesign:task" class="mx-2"></Icon>
             <div data-i18n="Dashboards">Tareas</div>
-          </nuxt-link>
-        
+          </nuxt-link>   
         </li>
 
-        <li class="menu-item">
+        <li class="menu-item" :class="{ 'active': $route.path === '/users' }">
           <nuxt-link to="/users" class="menu-link ">
             <Icon name="tabler:users" class="mx-2"></Icon>
             <div data-i18n="Layouts">Usuarios</div>
           </nuxt-link>
-
-         
         </li>
-
+      
      
       </ul>
     </div>
