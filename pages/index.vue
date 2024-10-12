@@ -7,7 +7,7 @@
             <div class="card-datatable table-responsive">
                 <div class="dataTables_wrapper dt-bootstrap5 no-footer">
                     <div class="row me-2">
-
+       
                         <div class="col-md-12">
                             <div
                                 class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0">
@@ -32,13 +32,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Descripcion de la tarea</td>
+                            <tr v-for="(t, i) in tareas">
+                                <td>{{ i+1 }}</td>
+                                <td>{{t.descripcion}}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button class="btn btn-sm btn-info"><i class="ti ti-pencil"></i></button>
-                                        <button class="btn btn-sm btn-danger"><i class="ti ti-trash"></i></button>
+                                        <button class="btn btn-sm btn-info" @click="tarea=t" data-bs-toggle="modal" data-bs-target="#modalTask" ><i class="ti ti-pencil"></i></button>
+                                        <button class="btn btn-sm btn-danger" @click="tareas.splice(i, 1)"><i class="ti ti-trash"></i></button>
                                     </div>
                                 </td>
                             </tr>
@@ -58,14 +58,16 @@
                             <form id="modalTaskForm" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework"
                                 onsubmit="return false" novalidate="novalidate">
                                 <div class="col-12 text-left">
+
                                     <label class="form-label" for="modalmodalTaskName">Descripcion</label>
-                                    <input type="text"  class="form-control"> 
+                                    <input type="text"  class="form-control" v-model="tarea.descripcion"> 
+                                  
                                 </div>
                                 <div class="col-12 text-center">
                                     <button type="reset" class="btn btn-label-secondary waves-effect" data-bs-dismiss="modal" aria-label="Close">
                                         Cancelar
                                     </button>
-                                    <button type="submit" class="btn btn-success me-sm-3 mx-2 waves-effect waves-light">Guardar</button>
+                                    <button type="submit" class="btn btn-success me-sm-3 mx-2 waves-effect waves-light" @click="saveTarea" data-bs-dismiss="modal" aria-label="Close">Guardar</button>
                                 </div>
                             </form>
                         </div>
@@ -78,5 +80,23 @@
 <script>
 export default {
     name: 'IndexPage',
+    data(){
+        return{
+            tareas:[],
+            tarea:{
+                descripcion:''
+            }
+        }
+    },
+    methods:{
+        saveTarea(){
+            let tarea = {...this.tarea}
+            console.log(tarea)
+            this.tareas.push(tarea)
+            this.tarea = {
+                descripcion:''
+            }
+        }
+    }
 }
 </script>
